@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is for the 67373 Junior Project at CMUQ.
 
-Things you may want to cover:
+CP: CGB
 
-* Ruby version
+Members of the group include: Hessa Boday, Fatima AlSafar, Mashael Al-Emadi, and Noor AlTamimi.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Latest commit: Demo 2
