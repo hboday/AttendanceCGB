@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Employee Login</title>
+	<style type="text/css">
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+			background-color: #f2f2f2;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 40px;
+			border: 1px solid #ccc;
+			background-color: #fff;
+			box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+			border-radius: 5px;
+			width: 100%;
+			max-width: 500px;
+			box-sizing: border-box;
+		}
+
+		h2 {
+			font-size: 30px;
+			font-weight: bold;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+
+		label {
+			font-size: 18px;
+			font-weight: bold;
+			margin-bottom: 10px;
+			text-align: left;
+			width: 100%;
+		}
+
+		input {
+			font-size: 20px;
+			padding: 15px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-bottom: 20px;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			padding: 15px 30px;
+			font-size: 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			margin-top: 20px;
+			width: 100%;
+		}
+
+		button:hover {
+			background-color: #3e8e41;
+		}
+
+		.logo {
+			display: block;
+			margin: 0 auto;
+			width: 200px;
+			height: auto;
+			margin-bottom: 40px;
+		}
+	</style>
+</head>
+<body>
+<%= form_tag do %>
+  <%= image_tag("logo.svg", width: 200, class: "logo") %>
+  <h2>Employee Login</h2>
+  <%= label_tag(:username, "Username") %>
+  <%= text_field_tag(:username, nil, required: true) %>
+  <%= label_tag(:password, "Password") %>
+  <%= password_field_tag(:password, nil, required: true) %>
+  <%= submit_tag "Sign in", class: "btn btn-primary btn-lg mt-3" %>
+<% end %>
+</body>
+</html>

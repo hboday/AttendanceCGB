@@ -1,0 +1,62 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag 'table' %>
+<% end %>
+
+<div class="limiter">
+<% if show_name %>
+ <h3 class="text-primary"><%= employee.name %></h2>
+<% end %>
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table">
+        <div class="row header">
+          <div class="cell">
+            Date
+          </div>
+          <div class="cell">
+            Planned Start
+          </div>
+          <div class="cell">
+            Planned End
+          </div>
+          <div class="cell">
+            First Clock-in
+          </div>
+          <div class="cell">
+            Last Clock-out
+          </div>
+          <div class="cell">
+            Actual Working Hours
+          </div>
+        </div>
+
+        <% employee.completed_shifts.each do |a| %>
+        <div class="row">
+            <div class="cell" data-title="Date">
+              <%= a.shift.start_time.to_date %>
+            </div>
+            <div class="cell" data-title="Planned Start">
+              <%= a.shift.start_time.strftime("%H:%M")  %>
+            </div>
+            <div class="cell" data-title="Planned End">
+              <%= a.shift.end_time.strftime("%H:%M")  %>
+            </div>
+             <div class="cell" data-title="First Clock-in">
+              <%= a.clockin_time.strftime("%H:%M")  %>
+            </div>
+            <div class="cell" data-title="Last Clock-out">
+              <%= a.clockout_time.strftime("%H:%M")  %>
+            </div>
+
+             <div class="cell" data-title="Actual Working Hours">
+              <%= "#{a.duration} hours" %>
+            </div>
+        </div>
+        <% end %>
+
+
+        
+      </div>
+    </div>
+  </div>
+</div>

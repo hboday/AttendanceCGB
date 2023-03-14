@@ -1,0 +1,61 @@
+<!-- app/views/posts/new.html.erb -->
+<%#= link_to "New Post", "#", id: "new-post-modal", class: "btn btn-primary"  %>
+
+<button type="button" class="btn btn-outline-success btn-lg float-right" data-bs-toggle="modal" data-bs-target="#new-post-modal">
+    Open Modal
+  </button>
+
+<div id="new-post-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_with url: posts_path, id: "new-post-form", remote: true do |f| %>
+        <div class="modal-header">
+          <h5 class="modal-title">New Post</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :body %>
+            <%= f.text_area :body, class: "form-control" %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Create Post", class: "btn btn-primary", data: {bs_dismiss: 'modal'} %>
+          
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#new-post-link').click(function() {
+      $('#new-post-modal').modal('show');
+    });
+
+    $('#new-post-modal').on('ajax:success', function(event) {
+      $('#new-post-modal').modal('hide');
+      $('#posts').prepend(
+        '<div class="card">' +
+        '<div class="card-body">' +
+        '<h5 class="card-title">' + event.detail[0].title + '</h5>' +
+        '<p class="card-text">' + event.detail[0].body + '</p>' +
+        '</div>' +
+        '</div>'
+      );
+      $('#new-post-form')[0].reset();
+    });
+
+    $('#new-post-modal').on('ajax:error', function(event) {
+      alert('Error: ' + event.detail[0].statusText);
+    });
+  });
+</script>
