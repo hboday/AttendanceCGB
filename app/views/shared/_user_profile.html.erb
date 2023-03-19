@@ -1,6 +1,6 @@
 <div class="card mb-3">
   <div class="card-body">
-    <h5 class="card-title"><%= current_user.employee.name %></h5>
+    <h5 class="card-title" style="color: white"><%= current_user.employee.name %></h5>
     <img src="<%= current_user.employee.email_gravatar %>" alt="<%= current_user.employee.name %>" class="rounded-circle mb-3" width="80">
     <p class="card-text"><%= current_user.employee.role %></p>
     <% if current_user.employee.phone.present? %>
