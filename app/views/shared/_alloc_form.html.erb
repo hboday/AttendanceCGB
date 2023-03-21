@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <%= form_tag("/sa", method: "post", id: "form") do %>
+    <div class="form-row mb-3">
+      <div class="form-group col-sm-6">
+        <%= label_tag(:start_time, "Start Time", class: "text-primary") %>
+        <%= text_field_tag(:start_time, nil, class: "form-control") %>
+      </div>
+
+      <div class="form-group col-sm-6">
+        <%= label_tag(:end_time, "End Time", class: "text-primary") %>
+        <%= text_field_tag(:end_time, nil, class: "form-control") %>
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div class="form-group col-sm-6">
+        <%= label_tag(:from, "From", class: "text-primary") %>
+        <%= text_field_tag(:from, nil, class: "form-control") %>
+      </div>
+
+      <div class="form-group col-sm-6">
+        <%= label_tag(:to, "To", class: "text-primary") %>
+        <%= text_field_tag(:to, nil, class: "form-control") %>
+      </div>
+    </div>
+
+    <div class="form-row mb-3">
+      <div class="form-group col-sm-6">
+        <%= label_tag(:employees, "Employees", class: "text-primary") %>
+        <% @employees.each do |employee| %>
+          <div class="form-check">
+            <%= check_box_tag 'employee_ids[]', employee.id, false, class: "form-check-input" %>
+            <%= label_tag "employee_#{employee.id}", employee.name, class: "form-check-label" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+  <%= label_tag(:days_of_the_week, "Days of the week", class: "col-sm-2 col-form-label text-primary") %>
+  <% Date::DAYNAMES.each_with_index do |day, index| %>
+    <div class="form-check">
+      <% if day == "Friday" || day == "Saturday" %>
+        <%= check_box_tag "day_ids[]", index, false, class: "form-check-input text-danger" %>
+        <%= label_tag "day_#{index}", day, class: "form-check-label text-danger" %>
+      <% else %>
+        <%= check_box_tag "day_ids[]", index, false, class: "form-check-input" %>
+        <%= label_tag "day_#{index}", day, class: "form-check-label" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+    </div>
+
+    <div class="form-group">
+      <%= submit_tag("Create shifts", class: "btn btn-primary") %>
+    </div>
+  <% end %>
+</div>

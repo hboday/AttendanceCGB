@@ -1,0 +1,46 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag 'sidebar' %>
+<% end %>
+<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div class="p-4 pt-5">
+		  		<!-- <h1><a href="index.html" class="logo">Splash</a></h1> -->
+	        <ul class="list-unstyled components mb-5">
+	          <li class="active">
+	            <!-- a href="#homeSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a> -->
+				<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#homeSubmenu" aria-expanded="false" aria-controls="collapseExample">
+    Home ▾
+  </button>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                 <%= render partial: sidebar_links_partial, locals: { current_user: current_user } %>
+	            </ul>
+	          </li>
+	         
+	          <li>
+			  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#pageSubmenu" aria-expanded="false" aria-controls="collapseExample">
+    				User Profile ▾
+  			  </button>
+  
+             
+              <div class="collapse" id="pageSubmenu">
+			  <%= render 'shared/user_profile' %>
+                </div>
+
+		
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      
+       <main>
+	   		
+		<%= render partial: 'shared/reports'  %>
+
+  </main>
+		</div>

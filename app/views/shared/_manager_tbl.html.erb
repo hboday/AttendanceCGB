@@ -1,0 +1,100 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag 'manager_table' %>
+<% end %>
+
+<div class="limiter">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table">
+        <div class="row header">
+          <div class="cell">
+            Employee Name
+          </div>
+          <div class="cell">
+            Date
+          </div>
+          <div class="cell">
+            Planned Start
+          </div>
+          <div class="cell">
+            Planned End
+          </div>
+          <div class="cell">
+            First Clock-in
+          </div>
+          <div class="cell">
+            Last Clock-out
+          </div>
+          <div class="cell">
+            Actual Working Hours
+          </div>
+        </div>
+
+        <% current_user.employee.managed_employees_completed_shifts.map  do |a| %>
+        <div class="row edit-shift-assignment" data-bs-toggle="modal" data-bs-target="#edit-shift-assignment-modal" data-shift-assignment-id="<%= a.id %>">
+            <div class="cell" data-title="Name">
+              <%= a.employee.name %>
+            </div>
+            <div class="cell" data-title="Date">
+              <%= a.shift.start_time.to_date %>
+            </div>
+            <div class="cell" data-title="Planned Start">
+              <%= a.shift.start_time.strftime("%H:%M")  %>
+            </div>
+            <div class="cell" data-title="Planned End">
+              <%= a.shift.end_time.strftime("%H:%M")  %>
+            </div>
+             <div class="cell" data-title="First Clock-in">
+              <%= a.clockin_time.strftime("%H:%M")  %>
+            </div>
+            <div class="cell" data-title="Last Clock-out">
+              <%= a.clockout_time.strftime("%H:%M")  %>
+            </div>
+
+             <div class="cell" data-title="Actual Working Hours">
+              <%= a.duration %>
+            </div>
+        </div>
+        <% end %>
+
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if current_user.hr? %>
+<div class="modal" tabindex="-1" role="dialog" id="edit-shift-assignment-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Attendance Log</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: amend_path, method: "get", id: "edit-shift-assignment-form", remote: true do |f| %>
+          <%= f.hidden_field :shift_assignment_id %>
+          
+          <div class="form-group">
+            <%= f.label :clockin_time %>
+            <%= f.text_field :clockin_time, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :clockout_time %>
+            <%= f.text_field :clockout_time, class: "form-control" %>
+          </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <%= f.submit "Save", class: "btn btn-primary", data: {bs_dismiss: 'modal'} %>
+       
+      </div>
+      <% end  %>
+    </div>
+  </div>
+</div>
+<% end %>

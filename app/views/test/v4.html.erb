@@ -1,0 +1,48 @@
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="card mt-5">
+                    <div class="card-body">
+                            
+
+<%= form_tag("/process", method: "post", id: "form") do %>
+<div class="mb-3">
+
+<div class="form-group">
+<%= label_tag(:card_num, "Card Number", class: "form-label") %>
+<div class="col-sm-4">
+<%= text_field_tag(:card_num, nil, class: "form-control") %>
+</div>
+</div>
+
+
+<% end %>
+
+
+<% if flash[:notice] %>
+    <div class="flash notice"><%= flash[:notice] %></div>
+<% end %>
+
+<script>
+
+window.onload = function() {
+  document.getElementById("card_num").focus();
+};
+
+const form = document.getElementById('form');
+const textField = document.getElementById('card_num');
+
+
+textField.addEventListener('input', function() {
+  setTimeout(function() {
+    form.submit();
+  }, 1500);
+});
+
+      setTimeout(function() {
+          $('.notice').fadeOut('slow', function() {
+              $('.notice').addClass('hide-notice');
+          });
+      }, 3000);
+
+</script>
