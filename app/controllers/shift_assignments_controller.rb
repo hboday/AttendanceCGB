@@ -17,12 +17,12 @@ class ShiftAssignmentsController < ApplicationController
 
     if shift_assignment.save
       respond_to do |format|
-        format.html { redirect_to employee_path(shift_assignment.employee), notice: "Attendance log updated successfully." }
+        format.html { redirect_to employee_path(current_user.employee), notice: "Attendance log updated successfully." }
         format.js { render :update_row, locals: {shift_assignment: shift_assignment} }
       end
     else
       respond_to do |format|
-        format.html { redirect_to employee_path(shift_assignment.employee), alert: "Failed to update attendance log." }
+        format.html { redirect_to employee_path(current_user.employee), alert: "Failed to update attendance log." }
         format.js { render :update_row_error }
       end
     end
