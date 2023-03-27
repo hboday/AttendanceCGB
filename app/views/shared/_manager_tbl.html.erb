@@ -56,13 +56,26 @@
             </div>
         </div>
         <% end %>
-
+        
+        <script>
+  document.querySelectorAll(".edit-shift-assignment").forEach(function(row) {
+    row.addEventListener("click", function() {
+      var shiftAssignmentId = this.dataset.shiftAssignmentId;
+      var hiddenField = document.querySelector("#edit-shift-assignment-form [name='shift_assignment_id']");
+      hiddenField.value = shiftAssignmentId;
+    });
+  });
+</script>
+        
 
         
       </div>
     </div>
   </div>
 </div>
+
+
+
 
 <% if current_user.hr? %>
 <div class="modal" tabindex="-1" role="dialog" id="edit-shift-assignment-modal">
@@ -75,7 +88,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_with url: amend_path, method: "get", id: "edit-shift-assignment-form", remote: true do |f| %>
+        <%= form_with url: amend_path, method: "patch", id: "edit-shift-assignment-form", remote: true do |f| %>
           <%= f.hidden_field :shift_assignment_id %>
           
           <div class="form-group">

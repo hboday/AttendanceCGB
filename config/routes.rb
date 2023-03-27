@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'shift_assignments/edit'
   get 'static/reports'
   resources :posts
   # get 'sessions/new'
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   #resources :shift_assignments do
   #  put 'amend', on: :member
   #end
-  get '/amend', to: "shift_assignments#edit", as: :amend
+  patch '/amend', to: "shift_assignments#edit", as: :amend
 
   # get 'employees/index'
   # get 'employees/show'
