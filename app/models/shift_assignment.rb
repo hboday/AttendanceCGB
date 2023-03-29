@@ -3,15 +3,18 @@ class ShiftAssignment < ApplicationRecord
   belongs_to :shift
 
   # validate :shift_cannot_be_in_the_past # shift cannot being assigned to cannot be in the past
-  validate :employee_is_not_already_working_on_date, on: create
+  validate :employee_is_not_already_working_on_date, on: create 
+  # cannot create another shift for an employee who already has a shift on that day
 
   def edit
     # puts "Hi!!!"
   end
 
-  scope :completed, -> {where.not(clockout_time:nil)}
-  scope  :chronological, -> {order('clockin_time desc')}
-  def self.create_shift_assignments(shift_ids, employee_ids)
+  scope :completed, -> {where.not(clockout_time:nil)} # shows all completed shift assigned
+  scope  :chronological, -> {order('clockin_time desc')} # shows the shifts by decending clock-in time
+  
+  def self.create_shift_assignments(shift_ids, employee_ids) 
+    # helper used to create shift assignments that allows shift creation for multiple dates and employees
     shift_ids.each do |s_id|
       employee_ids.each do |e_id|
         ShiftAssignment.create(shift_id: s_id, employee_id: e_id)
@@ -19,13 +22,15 @@ class ShiftAssignment < ApplicationRecord
     end
   end
 
-  def completed?
+  def completed? # checks if a shift has been completed
     clockout_time.present?
   end
 
-  def duration
+  def duration 
+    # calculates the duration of the shift that an employee worked (based on clock-in and clock-out time)
     return nil unless completed?
 
+    # displays the duration in hours and remaining minutes
     duration_in_seconds = (clockout_time - clockin_time).to_i
     duration_in_hours = duration_in_seconds / 3600
     duration_in_minutes = (duration_in_seconds % 3600) / 60
@@ -35,7 +40,7 @@ class ShiftAssignment < ApplicationRecord
   private
 
   # doesn't work for overnight shift! will assign on the same day as ending
-  def employee_is_not_already_working_on_date
+  def employee_is_not_already_working_on_date # method for validation
     # get all dates being worked
     dates_working = employee.shifts.chronological.map { |s| s.start_time.to_date }
     return unless (dates_working.include? shift.start_time.to_date) || (dates_working.include? shift.end_time.to_date)

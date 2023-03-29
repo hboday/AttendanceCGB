@@ -1,10 +1,11 @@
 class SessionsController < ApplicationController
-  def new
+  def new # displays the login form
     # render 'new', layout: false
     #  render 'newb', layout: true
   end
 
-  def create
+  # when a user logs in, the system esablishes a new session for them that lasts until they logout
+  def create # authenticates who the user is 
     uname = params[:user][:username]
     password = params[:user][:password]
     user = User.find_by(username: uname)
@@ -19,7 +20,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy # destroys the session when the user logs out and redirects them to the login page
     log_out
     redirect_to login_path
   end

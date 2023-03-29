@@ -6,12 +6,17 @@ class Ability
 
     if user.hr?
       can :manage, :all
-    elsif user.manager?
+        # If the user has an HR role, they can manage everything on the system.
+    
+      elsif user.manager?
       can :create, :shift_allocations
       can :read, Employee, id: user.id
-      can :manage, Employee, manager_id: user.id # make sure the ids of employees and users match!!!
+      can :manage, Employee, manager_id: user.id # make sure the ids of employees and users match
+          # If the user is a manager, they can create shift allocations and they can read their 
+          # own page and they can manage their own employees.
+
     else
-      can :read, Employee, id: user.id # self
+      can :read, Employee, id: user.id # self - regular employees can only view their own information.
     end
   end
 end

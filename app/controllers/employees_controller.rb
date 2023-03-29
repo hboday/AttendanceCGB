@@ -1,17 +1,18 @@
 class EmployeesController < ApplicationController
   load_and_authorize_resource
-  def show
+  
+  def show # show the current employee page
     @employee = current_user.employee
   end
 
   def index; end
   
-  def edit
+  def edit # not used - but it is to edit employees details 
     @employee = Employee.find(params[:id])
     @shift_assignment = ShiftAssignment.find(params[:shift_assignment_id])
 end
 
-def update
+def update # update clock-in and clock-out time (manual updates)
   debugger
   @employee = Employee.find(params[:id])
   @shift_assignment = ShiftAssignment.find(params[:shift_assignment_id])

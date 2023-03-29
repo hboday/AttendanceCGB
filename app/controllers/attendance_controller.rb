@@ -2,7 +2,11 @@ class AttendanceController < ApplicationController
   def clock
   end
 
-  def proc
+  def proc # clock-in clock-out process
+    # checks if the user has a pending shift and allows them in if they do
+    # sets the clock-in time for employees
+    # if an employee started working their shift then it allows them to clock-out
+    # stores clock-in and clock-out time in the database
     # debugger
     puts "The card number is #{params}"
     e = Employee.with_card  params[:card_num]
@@ -31,7 +35,10 @@ class AttendanceController < ApplicationController
     end
     redirect_to "/clock"
   end
-  def allocate
+
+  def allocate # only allows allocations based on authorization
+    # HR admins can create shifts for all employees 
+    # managers are restricted to their own employees
     authorize! :create, :shift_allocations
     if current_user.hr?
       @employees = Employee.all
@@ -41,7 +48,7 @@ class AttendanceController < ApplicationController
     #render "alloc_form"
   end
 
-  def shift_allocate
+  def shift_allocate # takes the data from the form and processes it (allocates shift assignment to the database)
     shift_start_time = params[:start_time]
     shift_end_time = params[:end_time]
     from = params[:from]
@@ -55,7 +62,7 @@ class AttendanceController < ApplicationController
     flash[:notice] = "Created shifts!"
   end
 
-  def show_shifts
+  def show_shifts # show all the shifts for all employees
     @employees = Employee.all
   end
 

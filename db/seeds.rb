@@ -4,16 +4,19 @@
 #
 # ])
 
+# initialize database with data for testing purposes
 user1 = User.create!(username: 'mashael', password: 'password123', password_confirmation: 'password123')
 user2 = User.create!(username: 'hessa', password: 'password123', password_confirmation: 'password123')
 user3 = User.create!(username: 'fatima', password: 'password123', password_confirmation: 'password123')
 user4 = User.create!(username: 'noor', password: 'password123', password_confirmation: 'password123')
 
+# store location information to assign employees for
 Location.create!([
                    { name: 'AlWaab', address: 'XYZ Street' },
                    { name: 'AlSadd', address: 'ABC Street' }
                  ])
 
+# store unique information about employees 
 Employee.create!([
                    { card_num: '41368', first_name: 'Mashael', last_name: 'Alemadi', email: 'malemadi19@gmail.com', phone: '50082008',
                      role: :employee, user_id: user1.id },
@@ -30,6 +33,7 @@ h = Employee.second
 f = Employee.third
 n = Employee.fourth
 
+# variables to assign managers to employees for testing purposes
 m.manager_id = h.id
 n.manager_id = h.id
 m.save!
@@ -38,14 +42,16 @@ n.save!
 #ShiftAssignment.delete_all
 #Shift.delete_all
 
-Shift.create_shifts("2023-03-01", "2023-03-12", "10:00", "18:00", 1)
+Shift.create_shifts("2023-03-01", "2023-03-12", "10:00", "18:00", 1) 
+# creating shifts in a given date range to test the attendance logs
 
 s_ids = Shift.all.map {|s| s.id}
 e_ids = [1, 4]
 
 ShiftAssignment.create_shift_assignments(s_ids, e_ids)
 
-ShiftAssignment.all.each do |a|
+ShiftAssignment.all.each do |a| 
+  # allocate shifts to specific employees with randomization for realistic testing purposes
 	t1 = a.shift.start_time
 	t2 = a.shift.end_time
 	r1 = t1 + (rand(20)-10).minutes
@@ -55,11 +61,9 @@ ShiftAssignment.all.each do |a|
 	a.save!
 end
 
-ls = Shift.create(start_time:4.hours.ago, end_time:4.hours.after, location_id:1)
+ls = Shift.create(start_time:4.hours.ago, end_time:4.hours.after, location_id:1) 
+# ongoing shift to clock-in (testing purposes)
 ShiftAssignment.create(shift:ls, employee:m)
-
-
-
 
 # ShiftAssignment.create!([
 #   {employee_id: 1, shift_id: 1, clockin_time: "2023-02-18 18:57:54", clockout_time: "2023-02-18 18:58:00"},
