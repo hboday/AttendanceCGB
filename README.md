@@ -82,7 +82,7 @@ Continue as follows:
 13. Then run, “yarn add sass” 
 14. Then run, “yarn add esbuild” 
 15. Then run, “bin/dev” to run the server
-
+d
 
 To manually open a locally stored file:
 1. Open VSCode
