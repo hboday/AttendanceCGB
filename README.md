@@ -12,7 +12,9 @@ The view is responsible for the user interface, the aesthetic of it, and present
 Lastly, the controller is responsible for the mediating between user requests (process logic), which mainly focuses on coordinating and communicating between the model and the view. 
 
 The versions of Ruby and Rails are as follows:
+
 Ruby: 3.1.2
+
 Rails: 7.0.4.2
 
 # Installing Supporting Softwares:
