@@ -90,4 +90,5 @@ To manually open a locally stored file:
 # Extra Useful Links:
 
 GitHub Documentations: https://docs.github.com/en
+
 VSCode Documentations: https://code.visualstudio.com/docs
