@@ -1,7 +1,5 @@
 # README
 
-# Overview
-
 This system aims to mitigate the problems the Civil Service and Government Development Bureau (CGB) is encountering with keeping track of employee’s attendance across the 50 different organizations that they are responsible for. 
 
 Hessa Boday, Fatima Al-Safar, Mashael Al-Emadi, and Noor Al-Tamimi worked together on developing a system that attempts to solve the scattered attendance problem by using mainly Ruby on Rails, with some CSS and HTML as well. 
