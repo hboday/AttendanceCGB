@@ -76,12 +76,12 @@ If asked for these:
 * Select Keep defaults
 
 Continue as follows:
-10. In the terminal, run the command “bundle install”
-11. Then, run the command “rails db:migrate”
-12. Then, run the command “rails db:seed” 
-13. Then run, “yarn add sass” 
-14. Then run, “yarn add esbuild” 
-15. Then run, “bin/dev” to run the server
+In the terminal, run the command “bundle install”
+Then, run the command “rails db:migrate”
+Then, run the command “rails db:seed” 
+Then run, “yarn add sass” 
+Then run, “yarn add esbuild” 
+Then run, “bin/dev” to run the server
 
 To manually open a locally stored file:
 1. Open VSCode
