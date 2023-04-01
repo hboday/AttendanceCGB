@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'calendar/show'
   get 'shift_assignments/edit'
   get 'static/reports'
   resources :posts

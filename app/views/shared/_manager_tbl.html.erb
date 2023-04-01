@@ -30,84 +30,69 @@
           </div>
         </div>
 
-        <% current_user.employee.managed_employees_completed_shifts.map  do |a| %>
-        <div class="row edit-shift-assignment" data-bs-toggle="modal" data-bs-target="#edit-shift-assignment-modal" data-shift-assignment-id="<%= a.id %>">
-            <div class="cell" data-title="Name">
-              <%= a.employee.name %>
-            </div>
-            <div class="cell" data-title="Date">
-              <%= a.shift.start_time.to_date %>
-            </div>
-            <div class="cell" data-title="Planned Start">
-              <%= a.shift.start_time.strftime("%H:%M")  %>
-            </div>
-            <div class="cell" data-title="Planned End">
-              <%= a.shift.end_time.strftime("%H:%M")  %>
-            </div>
-             <div class="cell" data-title="First Clock-in">
-              <%= a.clockin_time.strftime("%H:%M")  %>
-            </div>
-            <div class="cell" data-title="Last Clock-out">
-              <%= a.clockout_time.strftime("%H:%M")  %>
-            </div>
-
-             <div class="cell" data-title="Actual Working Hours">
-              <%= a.duration %>
-            </div>
-        </div>
+        <% current_user.employee.managed_employees_completed_shifts.each do |shift_assignment| %>
+          <%= render partial: 'shared/shift_assignment_row', locals: { shift_assignment: shift_assignment } %>
         <% end %>
+
+
         
-        <script>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
   document.querySelectorAll(".edit-shift-assignment").forEach(function(row) {
     row.addEventListener("click", function() {
       var shiftAssignmentId = this.dataset.shiftAssignmentId;
       var hiddenField = document.querySelector("#edit-shift-assignment-form [name='shift_assignment_id']");
       hiddenField.value = shiftAssignmentId;
+      
+      var name = this.querySelector("[data-title='Name']").textContent.trim();
+      var date = this.querySelector("[data-title='Date']").textContent.trim();
+      var clockin = this.querySelector("[data-title='First Clock-in']").textContent.trim();
+      var clockout = this.querySelector("[data-title='Last Clock-out']").textContent.trim();
+      
+      var modal = document.querySelector("#edit-shift-assignment-modal");
+      modal.querySelector(".modal-title").textContent = "Editing " + name + "'s record for " + date;
+      modal.querySelector("#clockin-time-input").value = clockin;
+      modal.querySelector("#clockout-time-input").value = clockout;
     });
   });
 </script>
-        
-
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
 
 <% if current_user.hr? %>
+
 <div class="modal" tabindex="-1" role="dialog" id="edit-shift-assignment-modal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Edit Attendance Log</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Attendance Log</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= form_with url: amend_path, method: "patch", id: "edit-shift-assignment-form", remote: true do |f| %>
+            <%= f.hidden_field :shift_assignment_id %>
+            
+            <div class="form-group">
+              <%= f.label :clockin_time %>
+              <%= f.text_field :clockin_time, class: "form-control", id: "clockin-time-input" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :clockout_time %>
+              <%= f.text_field :clockout_time, class: "form-control", id: "clockout-time-input" %>
+            </div>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <%= f.submit "Save", class: "btn btn-primary", data: {bs_dismiss: 'modal'} %>
+         
+        </div>
+        <% end  %>
       </div>
-      <div class="modal-body">
-        <%= form_with url: amend_path, method: "patch", id: "edit-shift-assignment-form", remote: true do |f| %>
-          <%= f.hidden_field :shift_assignment_id %>
-          
-          <div class="form-group">
-            <%= f.label :clockin_time %>
-            <%= f.text_field :clockin_time, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :clockout_time %>
-            <%= f.text_field :clockout_time, class: "form-control" %>
-          </div>
-       
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <%= f.submit "Save", class: "btn btn-primary", data: {bs_dismiss: 'modal'} %>
-       
-      </div>
-      <% end  %>
     </div>
-  </div>
 </div>
+
 <% end %>

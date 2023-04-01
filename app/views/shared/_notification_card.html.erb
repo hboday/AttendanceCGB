@@ -1,0 +1,17 @@
+<div class="card mb-3 custom-card">
+  <div class="card-header custom-card-header d-flex justify-content-between">
+    <strong>Alert</strong>
+    <span class="time"><%= Time.now.strftime('%d %b %Y %I:%M%p') %></span>
+  </div>
+  <div class="card-body d-flex">
+    <div class="card-text custom-card-text">
+      <%= card_text %>
+    </div>
+    <div class="ms-auto align-self-start p-2 bg-dark rounded-end">
+      <div class="icon-container">
+        <i class="bi bi-chat-fill"></i>
+        <i class="bi bi-check-lg text-success"></i>
+      </div>
+    </div>
+  </div>
+</div>

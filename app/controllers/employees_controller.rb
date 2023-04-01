@@ -3,6 +3,14 @@ class EmployeesController < ApplicationController
   
   def show # show the current employee page
     @employee = current_user.employee
+    if @employee.hr?
+      @notifications = ['HR notification 1', 'HR notification 2']
+    elsif @employee.manager?
+      @notifications = ['Manager notification 1', 'Manager notification 2']
+    else
+      @notifications = ['Employee notification 1', 'Employee notification 2']
+    end
+    render 'employees/show', locals: { notifications: @notifications }
   end
 
   def index; end

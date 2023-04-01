@@ -11,12 +11,12 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="weekly" role="tabpanel" aria-labelledby="weekly-tab">
-    <%= image_tag("att_weekly.jpg", alt: "weekly", size: '1152x768') %>
+    <%= image_tag((current_user.hr? ? "Weekly-HR.png" : "Weekly-Manager.png"), alt: "weekly", size: '1136x1796') %>
   </div>
   <div class="tab-pane fade" id="monthly" role="tabpanel" aria-labelledby="monthly-tab">
-     <%= image_tag("att_monthly.jpg", alt: "monthly", size: '1152x768') %>
+     <%= image_tag((current_user.hr? ? "Monthly-HR.png" : "Monthly-Manager.png"), alt: "monthly", size: '1136x1796') %>
   </div>
   <div class="tab-pane fade" id="yearly" role="tabpanel" aria-labelledby="yearly-tab">
-     <%= image_tag("att_yearly.jpg", alt: "yearly", size: '1152x768') %>
+     <%= image_tag((current_user.hr? ? "Yearly-HR.png" : "Yearly-Manager.png"), alt: "yearly", size: '1136x1796') %>
   </div>
 </div>

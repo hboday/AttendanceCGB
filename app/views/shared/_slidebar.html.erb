@@ -1,0 +1,9 @@
+<div id="slidebar" class="slidebar">
+  <div class="p-3 h-100">
+    <div class="d-flex flex-column justify-content-center">
+      <% @notifications.each do |notification| %>
+        <%= render partial: 'shared/notification_card', locals: { card_text: notification } %>
+      <% end %>
+    </div>
+  </div>
+</div>

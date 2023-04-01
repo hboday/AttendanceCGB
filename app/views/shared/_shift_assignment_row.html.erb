@@ -1,0 +1,24 @@
+<div class="row edit-shift-assignment" data-bs-toggle="modal" data-bs-target="#edit-shift-assignment-modal" data-shift-assignment-id="<%= shift_assignment.id %>" id="shift-assignment-<%= shift_assignment.id %>">
+
+  <div class="cell" data-title="Name">
+    <%= shift_assignment.employee.name %>
+  </div>
+  <div class="cell" data-title="Date">
+    <%= shift_assignment.shift.start_time.to_date %>
+  </div>
+  <div class="cell" data-title="Planned Start">
+    <%= shift_assignment.shift.start_time.strftime("%H:%M") %>
+  </div>
+  <div class="cell" data-title="Planned End">
+    <%= shift_assignment.shift.end_time.strftime("%H:%M") %>
+  </div>
+  <div class="cell" data-title="First Clock-in">
+    <%= shift_assignment.clockin_time.strftime("%H:%M") %>
+  </div>
+  <div class="cell" data-title="Last Clock-out">
+    <%= shift_assignment.clockout_time.strftime("%H:%M") %>
+  </div>
+  <div class="cell" data-title="Actual Working Hours">
+    <%= shift_assignment.duration %>
+  </div>
+</div>

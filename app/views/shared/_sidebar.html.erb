@@ -26,18 +26,22 @@
 			  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#pageSubmenu" aria-expanded="false" aria-controls="collapseExample">
     				User Profile ▾
   			  </button>
+
+			  
+			 
   
              
               <div class="collapse show" id="pageSubmenu">
 			  <%= render 'shared/user_profile' %>
                 </div>
+				 <li> <button id="toggle-slidebar" class="btn btn-primary" type="button">Notifications</button>
+  			<%= render "shared/slidebar" %>
 
 		
 	      </div>
     	</nav>
 
         <!-- Page Content  -->
-      
        <main>
 	   		<% if current_user.employee? %>
             <%= render partial: 'shared/tbl1', locals: {employee: @employee, show_name: false}  %>

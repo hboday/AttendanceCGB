@@ -12012,3 +12012,116 @@ a[data-toggle="collapse"] {
     /* Firefox 18- */
     color: rgba(0, 0, 0, 0.3);
 }
+
+/* slidebar.css contents */
+.slidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    /* Initially hidden off-screen */
+    width: 400px;
+    height: 100%;
+    /* background-color: #ffff00; */
+
+    background-color: rgba(128, 0, 0, 0.3);
+    overflow-x: hidden;
+    transition: 0.3s;
+}
+
+
+.slidebar.open {
+    right: 0;
+}
+
+.close-slidebar {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
+.opaque {
+    opacity: 1 !important;
+}
+
+/* slidebar.css */
+
+/* Other CSS rules */
+
+.custom-card {
+    border-radius: 1rem;
+    background-color: white;
+    overflow: hidden;
+}
+
+.custom-card .card-header,
+.custom-card .card-body {
+    background-color: white;
+    color: #333;
+    /* dark color for the text */
+}
+
+/*
+.custom-card .icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+*/
+
+.custom-card .icon-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 0;
+    /* make the top-right corner sharp */
+}
+
+
+.bi-chat-fill {
+    color: white;
+}
+
+
+.custom-card-header {
+    font-size: 14px;
+    /* smaller font size */
+    font-family: 'Roboto', sans-serif;
+    /* attractive font face */
+}
+
+.custom-card-text {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    padding: 15px;
+    /* add padding around the text */
+    line-height: 1.2;
+    /* reduce the spacing between lines */
+}
+
+
+.custom-card .card-body {
+    padding: 0;
+    /* remove padding */
+}
+
+.custom-card .icon-container {
+    height: 100%;
+    /* span the entire length of the card */
+
+    /* add a border between the card text and icon container */
+}
+
+.time {
+    margin-right: 60px;
+}
