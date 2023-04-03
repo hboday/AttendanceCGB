@@ -4,11 +4,11 @@ class EmployeesController < ApplicationController
   def show # show the current employee page
     @employee = current_user.employee
     if @employee.hr?
-      @notifications = ['HR notification 1', 'HR notification 2']
+      @notifications = ['Noor AlTamimi clocked-in late today.', 'Mashael AlEmadi clocked-in from unassigned location.', 'Hessa Boday clocked-out early today.', 'Fatima Alsafar has worked overtime today.']
     elsif @employee.manager?
-      @notifications = ['Manager notification 1', 'Manager notification 2']
+      @notifications = ['Noor AlTamimi clocked-in late today.', 'Mashael AlEmadi clocked-in from unassigned location.']
     else
-      @notifications = ['Employee notification 1', 'Employee notification 2']
+      @notifications = ['You clocked-in late today', 'You left early today']
     end
     render 'employees/show', locals: { notifications: @notifications }
   end
