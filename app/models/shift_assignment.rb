@@ -6,13 +6,14 @@ class ShiftAssignment < ApplicationRecord
   validate :employee_is_not_already_working_on_date, on: create 
   # cannot create another shift for an employee who already has a shift on that day
 
-  def edit
+  #def edit
     # puts "Hi!!!"
-  end
+  #end
 
+  scope :upcoming, -> {where(clockout_time:nil)}
   scope :completed, -> {where.not(clockout_time:nil)} # shows all completed shift assigned
-  scope  :chronological, -> {order('clockin_time desc')} # shows the shifts by decending clock-in time
-  
+  #scope  :chronological, -> {order('clockin_time desc')} # shows the shifts by decending clock-in time
+  scope :chronological, ->  {joins(:shift).order('start_time desc')}
   def self.create_shift_assignments(shift_ids, employee_ids) 
     # helper used to create shift assignments that allows shift creation for multiple dates and employees
     shift_ids.each do |s_id|
@@ -35,6 +36,18 @@ class ShiftAssignment < ApplicationRecord
     duration_in_hours = duration_in_seconds / 3600
     duration_in_minutes = (duration_in_seconds % 3600) / 60
     format('%02d:%02d', duration_in_hours, duration_in_minutes)
+  end
+
+  
+
+  def date_of_shift
+    shift.start_time.strftime("%Y-%m-%d")
+  end
+
+  def timings_for_calendar
+    s = shift.start_time.strftime('%H:%M')
+    e = shift.end_time.strftime('%H:%M')
+    "#{s} - #{e}"
   end
 
   private

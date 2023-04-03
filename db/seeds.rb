@@ -42,6 +42,7 @@ n.save!
 #ShiftAssignment.delete_all
 #Shift.delete_all
 
+
 Shift.create_shifts("2023-03-01", "2023-03-12", "10:00", "18:00", 1) 
 # creating shifts in a given date range to test the attendance logs
 
@@ -64,6 +65,7 @@ end
 ls = Shift.create(start_time:4.hours.ago, end_time:4.hours.after, location_id:1) 
 # ongoing shift to clock-in (testing purposes)
 ShiftAssignment.create(shift:ls, employee:m)
+
 
 # ShiftAssignment.create!([
 #   {employee_id: 1, shift_id: 1, clockin_time: "2023-02-18 18:57:54", clockout_time: "2023-02-18 18:58:00"},

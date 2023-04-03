@@ -1,7 +1,7 @@
 <% content_for :head do %>
 <%= stylesheet_link_tag 'sidebar' %>
 <% end %>
-<div class="wrapper d-flex align-items-stretch">
+<div class="wrapper d-flex align-items-stretch" data-controller="sidebar"  data-sidebar-open-class="open">
 			<nav id="sidebar">
 				<div class="custom-menu">
 					<button type="button" id="sidebarCollapse" class="btn btn-primary">
@@ -34,7 +34,7 @@
               <div class="collapse show" id="pageSubmenu">
 			  <%= render 'shared/user_profile' %>
                 </div>
-				 <li> <button id="toggle-slidebar" class="btn btn-primary" type="button">Notifications</button>
+				 <li> <button id="toggle-slidebar" data-action="sidebar#toggle" data-target="sidebar.toggleButton" class="btn btn-primary" type="button">Open Notifications</button>
   			<%= render "shared/slidebar" %>
 
 		

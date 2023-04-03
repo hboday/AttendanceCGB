@@ -24,7 +24,7 @@
         <%= link_to fa_icon("bell"), "#", class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to fa_stacked_icon("sign-out", base: "square-o"), "/logout", class: "nav-link" %>
+        <%= link_to fa_stacked_icon("sign-out", base: "square-o"), "/logout", class: "nav-link", data: {turbo: "false"} %>
       </li>
     </ul>
   </div>

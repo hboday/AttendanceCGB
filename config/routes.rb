@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'calendar/show'
+  get 'calendar', to: 'calendar#show', as: :calendar
   get 'shift_assignments/edit'
   get 'static/reports'
-  resources :posts
+  # resources :posts
   # get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'

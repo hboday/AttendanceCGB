@@ -9,9 +9,9 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     
 
-     <% if content_for?(:head) %>
-    <%= yield(:head) %>
-<% end %> 
+    <% if content_for?(:head) %>
+      <%= yield(:head) %>
+    <% end %> 
 
   </head>
 
