@@ -54,7 +54,7 @@
 
 .row.header {
     color: #fff;
-    background: #8A1538
+    background: #A29475
 }
 
 .cell {
@@ -150,7 +150,7 @@
 .table {
     width: 98%;
     /* border-radius: 10px; */
-    border: 4px solid #8A1538;
+    border: 4px solid #A29475;
 }
 
 

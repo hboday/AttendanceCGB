@@ -45,11 +45,11 @@ module ApplicationHelper
 
     def notifications
       if current_user.hr?
-        ['HR notification 1', 'HR notification 2']
+        ['Noor AlTamimi clocked-in late today.', 'Mashael AlEmadi clocked-in from unassigned location.', 'Hessa Boday clocked-out early today.', 'Fatima Alsafar has worked overtime today.']
       elsif current_user.manager?
-        ['Manager notification 1', 'Manager notification 2']
+        ['Noor AlTamimi clocked-in late today.', 'Mashael AlEmadi clocked-in from unassigned location.']
       else
-        ['Employee notification 1', 'Employee notification 2']
+        ['You clocked in 37 mintues late today', 'You attempted clocking in from unauthorized location on April 5']
       end
     end
 

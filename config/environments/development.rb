@@ -39,12 +39,12 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name: 'f8426ac9a693b2',
-    password: '87d24b12b527c4',
-    address: 'sandbox.smtp.mailtrap.io',
-    domain: 'sandbox.smtp.mailtrap.io',
-    port: '2525',
-    authentication: :cram_md5
+    :user_name => '25eb109c2debc9',
+    :password => '4f6f2fcb46b611',
+    :address => 'sandbox.smtp.mailtrap.io',
+    :domain => 'sandbox.smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
   }
 
 config.action_mailer.default_url_options = { host: "localhost", port: 3000 }

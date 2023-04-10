@@ -7,9 +7,10 @@ class EmployeesController < ApplicationController
     if current_user.employee?
       @shift_assignments = ShiftAssignment.completed.where(employee: @employee).chronological.paginate(page: params[:page], per_page: pp)
     elsif current_user.manager?
-      @shift_assignments = ShiftAssignment.completed.where(employee: Employee.where(manager_id:  @employee.id)).chronological.paginate(page: params[:page], per_page: pp)
+      employee_ids = Employee.where(manager_id:current_user.employee.id).map {|e| e.id}
+      @shift_assignments = ShiftAssignment.completed.where(employee: employee_ids).chronological.paginate(page: params[:page], per_page: pp)
     else
-      @shift_assignments = ShiftAssignment.completed.where(employee: Employee.where(manager_id: Employee.all)).chronological.paginate(page: params[:page], per_page: pp)
+      @shift_assignments = ShiftAssignment.completed.chronological.paginate(page: params[:page], per_page: pp)
     end
     render 'employees/table'
   end
