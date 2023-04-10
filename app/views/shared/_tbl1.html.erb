@@ -1,14 +1,10 @@
-<% content_for :head do %>
-<%= stylesheet_link_tag 'table' %>
-<% end %>
-
 <div class="limiter">
 <% if show_name %>
  <h3 class="text-primary"><%= employee.name %></h2>
 <% end %>
   <div class="container-table100">
     <div class="wrap-table100">
-      <div class="table">
+      <div class="table e">
         <div class="row header">
           <div class="cell">
             Date
@@ -28,9 +24,12 @@
           <div class="cell">
             Actual Working Hours
           </div>
+           <div class="cell">
+            Location
+          </div>
         </div>
 
-       <% employee.completed_shifts.chronological.each do |a| %>
+      <% shift_assignments.each do |a| %>
     <div class="row">
     <div class="cell" data-title="Date">
       <%= a.shift.start_time.to_date %>
@@ -50,8 +49,12 @@
     <div class="cell" data-title="Actual Working Hours">
       <%= "#{a.duration} hours" %>
     </div>
+     <div class="cell" data-title="Location">
+      <%= "#{a.shift.location.name}" %>
+    </div>
   </div>
 <% end %>
+<%= will_paginate shift_assignments %>
 
 
         

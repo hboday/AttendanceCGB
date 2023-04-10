@@ -28,4 +28,27 @@ class User < ApplicationRecord
   def employee? # returns true if the user is an employee, and false otherwise
     role? :employee
   end
+
+  def create_password_reset_token
+    raw_token = SecureRandom.urlsafe_base64
+    self.password_reset_token = Digest::SHA256.hexdigest(raw_token)
+    self.password_reset_sent_at = Time.zone.now
+    update_columns(password_reset_token: password_reset_token, password_reset_sent_at: password_reset_sent_at)
+    raw_token
+end
+
+
+  # Returns true if the given token matches the digest
+  def authenticated?(attribute, token)
+    #debugger
+    digest = self.send("#{attribute}_token")
+    return false if digest.nil?
+    digest == Digest::SHA256.hexdigest(token)
+  end
+
+  def clear_password_reset_token
+    update_columns(password_reset_token: nil, password_reset_sent_at: nil)
+  end
+
+
 end

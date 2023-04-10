@@ -12016,6 +12016,7 @@ a[data-toggle="collapse"] {
 /* slidebar.css contents */
 .slidebar {
     position: fixed;
+
     top: 0;
     right: -400px;
     /* Initially hidden off-screen */
@@ -12030,6 +12031,7 @@ a[data-toggle="collapse"] {
 
 
 .slidebar.open {
+    z-index: 999;
     right: 0;
 }
 
@@ -12124,4 +12126,17 @@ a[data-toggle="collapse"] {
 
 .time {
     margin-right: 60px;
+}
+
+#sidebar {
+    min-height: 850px;
+}
+
+#form {
+    font-family: Poppins-Regular;
+    font-size: 20px;
+}
+
+#form .form-control {
+    border: 1px solid black;
 }

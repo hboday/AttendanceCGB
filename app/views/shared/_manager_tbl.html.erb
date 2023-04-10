@@ -1,7 +1,3 @@
-<% content_for :head do %>
-<%= stylesheet_link_tag 'manager_table' %>
-<% end %>
-
 <div class="limiter">
   <div class="container-table100">
     <div class="wrap-table100">
@@ -28,12 +24,15 @@
           <div class="cell">
             Actual Working Hours
           </div>
+          <div class="cell">
+            Location
+          </div>
         </div>
-
-        <% current_user.employee.managed_employees_completed_shifts.each do |shift_assignment| %>
-          <%= render partial: 'shared/shift_assignment_row', locals: { shift_assignment: shift_assignment } %>
+    
+        <% shift_assignments.each do |a|  %>
+          <%= render partial: 'shared/shift_assignment_row', locals: { shift_assignment: a } %>
         <% end %>
-
+        <%= will_paginate shift_assignments %>
 
         
       </div>

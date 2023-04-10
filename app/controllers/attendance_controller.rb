@@ -8,16 +8,21 @@ class AttendanceController < ApplicationController
     # if an employee started working their shift then it allows them to clock-out
     # stores clock-in and clock-out time in the database
     # debugger
-    puts "The card number is #{params}"
+    
+    loc_id = params[:location_id]
     e = Employee.with_card  params[:card_num]
     if e
       if e.has_pending_shift?
-        flash[:notice] = "#{e} is clocking in."
-        if e.pending_shift.update!(clockin_time:Time.now)
-          flash[:notice] = "clocked in"
+        if e.pending_shift.shift.location.id == loc_id.to_i
+          flash[:notice] = "#{e} is clocking in."
+          if e.pending_shift.update!(clockin_time:Time.now)
+            flash[:notice] = "clocked in"
 
+          else
+            flash[:notice] = "issue clocking in"
+          end
         else
-          flash[:notice] = "issue clocking in"
+          flash[:notice] = "You do not have a shift at the current location!"
         end
 
       elsif e.is_working_shift?
@@ -33,7 +38,7 @@ class AttendanceController < ApplicationController
     else
       flash[:notice] = "Employee doesn't exist!"
     end
-    redirect_to "/clock"
+    redirect_to "/clock/#{loc_id}"
   end
 
   def allocate # only allows allocations based on authorization
@@ -46,7 +51,7 @@ class AttendanceController < ApplicationController
       @employees = Employee.for_manager(current_user.employee.id) # 1-1 relationship
     end
     @locations = Location.all
-    #render "alloc_form"
+    render "alloc_form"
   end
 
   def shift_allocate # takes the data from the form and processes it (allocates shift assignment to the database)
@@ -58,9 +63,9 @@ class AttendanceController < ApplicationController
     which_days = params[:day_ids].map{|d| d.to_i}
     location_id = params[:location_id]
     shift_ids = Shift.create_shifts(from, to, shift_start_time, shift_end_time, location_id, which_days)
-    #debugger
     ShiftAssignment.create_shift_assignments(shift_ids, employee_ids)
     flash[:notice] = "Created shifts!"
+    redirect_to employee_path(current_user.employee)
   end
 
   def show_shifts # show all the shifts for all employees

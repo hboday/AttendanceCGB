@@ -1,27 +1,19 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-  <%= link_to image_tag("logo.svg", alt: "Logo"), root_path, class: "navbar-brand" %>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <%= link_to image_tag("logo.svg", alt: "Logo"), root_path, class: "navbar-brand", data: {turbo: "false"} %>
 
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <%= link_to fa_icon("search"), "#", class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= form_tag '#', method: :get, class: "form-inline my-2 my-lg-0" do %>
-          <%= text_field_tag :query, nil, class: "form-control mr-sm-2", type: "search", placeholder: "Search" %>
-        <% end %>
-      </li>
-    </ul>
+    <form class="form-inline my-2 my-lg-0 mx-auto">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <%= link_to fa_icon("search"), "#", class: "input-group-text" %>
+        </div>
+        <input class="form-control border-success" type="search" placeholder="Search" aria-label="Search">
+      </div>
+    </form>
 
-    <ul class="navbar-nav">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-      
-        <%= link_to fa_icon("bell"), "#", class: "nav-link" %>
+        <%= render 'shared/user_profile_top' %>
       </li>
       <li class="nav-item">
         <%= link_to fa_stacked_icon("sign-out", base: "square-o"), "/logout", class: "nav-link", data: {turbo: "false"} %>

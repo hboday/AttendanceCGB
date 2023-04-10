@@ -1,20 +1,41 @@
-<% flash.each do |key, value| %>
+<%# CSS Styles for flash messages %>
+<style>
+  /* Custom styles for flash messages */
+  .alert-info {
+    background-color: rgba(0, 123, 255, 0.8); /* blue with 80% opacity */
+    color: #fff;
+  }
 
-  <div class="alert <%= key == "notice" ? 'alert-primary' : 'alert-danger' %> alert-dismissible" role="alert">
+  .alert-danger {
+    background-color: rgba(220, 53, 69, 0.8); /* red with 80% opacity */
+    color: #fff;
+  }
+
+  .alert-success {
+    background-color: rgba(40, 167, 69, 0.8); /* green with 80% opacity */
+    color: #fff;
+  }
+</style>
+
+<%# Flash Messages %>
+<% flash.each do |key, value| %>
+  <div class="alert <%= key == "notice" ? 'alert-info' : (key == "info" ? 'alert-info' : (key == "danger" ? 'alert-danger' : 'alert-success')) %> alert-dismissible fade show" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <%= value %>
   </div>
 <% end %>
 
+<%# JavaScript to remove flash messages %>
 <script>
-
-setTimeout(function() {
-  $('.alert-dismissible').slideUp('slow', function() {
-    $(this).remove();
-  });
-}, 5000);
-
-
+  setTimeout(function() {
+    var alerts = document.querySelectorAll('.alert-dismissible');
+    alerts.forEach(function(alert) {
+      alert.style.transition = 'height 0.5s ease, opacity 0.5s ease';
+      alert.style.height = '0';
+      alert.style.opacity = '0';
+      setTimeout(function() {
+        alert.remove();
+      }, 500);
+    });
+  }, 5000);
 </script>
-
-

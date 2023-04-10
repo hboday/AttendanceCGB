@@ -1,22 +1,37 @@
 <!DOCTYPE html>
+<!-- new application layout -->
 <html>
   <head>
-    <title>AttendanceV2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ClockIt</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'flatpickr', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'sidebar', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'table_common', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
 
     <% if content_for?(:head) %>
       <%= yield(:head) %>
     <% end %> 
-
   </head>
 
   <body>
-  <%= render 'shared/flashes' %>
-    <%= yield %>
+    <%= render 'shared/flashes' %>
+    <%= render 'shared/navbar' %>
+
+
+      <div class="wrapper d-flex align-items-stretch" 
+      data-controller="sidebar" 
+      data-sidebar-open-class="open">
+        
+        <%= render 'shared/sidebar' %>
+        <%= render 'shared/slidebar' %>
+        <main  class="flex-grow-1">
+        <%= yield %>
+        </main>
+      </div>
+
+
   </body>
 </html>

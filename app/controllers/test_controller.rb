@@ -1,12 +1,15 @@
 class TestController < ApplicationController
+
+  def w1
+  end
+
+=begin
   def v1; end
 
   def v2; end
 
   def v3; end
 
-  def v5
-  end
 
   def tabs
   
@@ -15,4 +18,6 @@ class TestController < ApplicationController
   def proc
     puts "#{params}"
   end
+=end
+
 end

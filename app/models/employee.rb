@@ -56,6 +56,16 @@ class Employee < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def humanized_role
+    if role == 'employee'
+      "Employee"
+    elsif role == 'manager'
+      "Manager"
+    else
+      "Human Resources"
+    end
+  end
+
   scope :for_manager, ->(id){where(manager_id:id)} # returns all employees and their specific manager
 
     #   def working_on(date)

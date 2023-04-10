@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  layout 'login'
   def new # displays the login form
     # render 'new', layout: false
     #  render 'newb', layout: true
@@ -15,7 +16,7 @@ class SessionsController < ApplicationController
       redirect_to employee_path(user.employee) # different from tut (his more general)
     else
       # flash error, how to render?
-      flash.now[:danger] = 'Invalid...'
+      flash.now[:danger] = 'Invalid Username/Password'
       render 'new', status: :unprocessable_entity
     end
   end

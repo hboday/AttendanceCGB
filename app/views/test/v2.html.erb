@@ -80,8 +80,12 @@
 <body>
 <%= form_tag("/process", method: "post", id: "form") do %>
   <%= image_tag("logo.svg", width: 200, class: "logo") %>
+	<%= hidden_field_tag :location_id, params[:id] %>
   <h2>Enter Card Number:</h2>
   <%= text_field_tag :card_num, nil, required: true, class: "form-control form-control-lg mt-3", placeholder: "Card Number" %>
+
+  
+
 <% end %>
 
 <script>

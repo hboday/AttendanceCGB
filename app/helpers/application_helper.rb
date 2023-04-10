@@ -36,12 +36,24 @@ module ApplicationHelper
   ###############
 
     def sidebar_links_partial
-    if current_user.manager? || current_user.hr?
-      'shared/manager_sidebar_links'
-    else
-      'shared/employee_sidebar_links'
+      if current_user.manager? || current_user.hr?
+        'shared/manager_sidebar_links'
+      else
+        'shared/employee_sidebar_links'
+      end
     end
-  end
+
+    def notifications
+      if current_user.hr?
+        ['HR notification 1', 'HR notification 2']
+      elsif current_user.manager?
+        ['Manager notification 1', 'Manager notification 2']
+      else
+        ['Employee notification 1', 'Employee notification 2']
+      end
+    end
+
+
 
   
 end

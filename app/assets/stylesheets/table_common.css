@@ -1,0 +1,160 @@
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('Poppins-Regular.ttf')
+}
+
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('Poppins-Bold.ttf')
+}
+
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+.container-table100 {
+
+    width: 100%;
+    min-height: 100vh;
+    background: #fff;
+
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0px 0px 0px 30px;
+}
+
+.wrap-table100 {
+    /* width: 960px; */
+
+    width: 100%;
+    /* border-radius: 0px; */
+    overflow: hidden
+}
+
+
+
+.row {
+    display: table-row;
+    /* background: #fff; */
+}
+
+.row:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.row:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+
+.row.header {
+    color: #fff;
+    background: #8A1538
+}
+
+.cell {
+    display: table-cell
+}
+
+
+.row .cell {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #666;
+    line-height: 1.2;
+    font-weight: unset !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f2f2f2
+}
+
+.row.header .cell {
+    font-family: Poppins-Regular;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: unset !important;
+    padding-top: 19px;
+    padding-bottom: 19px
+}
+
+.row:not(.header):hover {
+    background-color: #dedede;
+    cursor: pointer
+}
+
+.row .cell:nth-child(1) {
+    width: 12.5%;
+}
+
+.row .cell:nth-child(2) {
+    width: 12.5%;
+}
+
+.row .cell:nth-child(3) {
+    width: 12.5%;
+}
+
+.row .cell:nth-child(4) {
+    width: 12.5%;
+}
+
+
+.row .cell:nth-child(5) {
+    width: 12.5%;
+}
+
+.row .cell:nth-child(6) {
+    width: 12.5%;
+}
+
+.row .cell:nth-child(7) {
+    width: 12.5%;
+}
+
+.row .cell:nth-child(8) {
+    width: 12.5%;
+}
+
+
+.e .row .cell:nth-child(1) {
+    width: 16.66%;
+}
+
+.e .row .cell:nth-child(2) {
+    width: 16.66%;
+}
+
+.e .row .cell:nth-child(3) {
+    width: 16.66%;
+}
+
+.e .row .cell:nth-child(4) {
+    width: 16.66%;
+}
+
+
+.e .row .cell:nth-child(5) {
+    width: 16.66%;
+}
+
+.e .row .cell:nth-child(6) {
+    width: 16.66%;
+}
+
+.table {
+    width: 98%;
+    /* border-radius: 10px; */
+    border: 4px solid #8A1538;
+}
+
+
+.e {
+    width: 90%;
+    /* border-radius: 10px; */
+}
