@@ -49,7 +49,7 @@ module ApplicationHelper
       elsif current_user.manager?
         ['Noor AlTamimi clocked-in late today.', 'Mashael AlEmadi clocked-in from unassigned location.']
       else
-        ['You clocked in 37 mintues late today', 'You attempted clocking in from unauthorized location on April 5']
+        ['You have used ' + current_user.employee.grace_time_used_in_current_month + ' of your grace time for this month.', 'You clocked in 37 mintues late today', 'You attempted clocking in from unauthorized location on April 5']
       end
     end
 

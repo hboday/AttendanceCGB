@@ -6,7 +6,7 @@ class CalendarController < ApplicationController
       @end_month = upcoming_assignments.last.shift.start_time.month
       @start_year =  upcoming_assignments.first.shift.start_time.year
       @end_year = upcoming_assignments.last.shift.start_time.year
-      @timings = upcoming_assignments.map{ |a|  [a.date_of_shift, a.timings_for_calendar]}.to_h
+      @timings_and_location = upcoming_assignments.map{ |a|  [a.date_of_shift, a.timings_and_location_for_calendar]}.to_h
       #debugger
     end
   end

@@ -51,6 +51,14 @@ class Employee < ApplicationRecord
   def is_working_shift? # returns true if the employee is currently active at work (ongoing shift)
     working_shift.present?
   end
+
+  def grace_time_used_in_current_month
+    num_seconds = shift_assignments.where(clockout_time:Time.zone.now.all_month).map { |a| a.grace_time_used }.sum.floor
+    hours = num_seconds / 3600
+    minutes = (num_seconds % 3600) / 60
+    "#{hours} hours and #{minutes} minutes"
+end
+
   
   def name # returns the full name of employees
     "#{first_name} #{last_name}"

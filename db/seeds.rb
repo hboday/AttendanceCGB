@@ -564,7 +564,7 @@ salah.manager_id = omar.id
 #Shift.delete_all
 
 
-Shift.create_shifts("2023-03-01", "2023-03-12", "10:00", "18:00", 1) 
+Shift.create_shifts(10.days.ago.strftime("%Y-%m-%d"), 1.day.ago.strftime("%Y-%m-%d"), "10:00", "18:00", 1) 
 # creating shifts in a given date range to test the attendance logs
 
 s_ids = Shift.all.map {|s| s.id}

@@ -12,6 +12,7 @@ class ShiftAssignment < ApplicationRecord
 
   scope :upcoming, -> {where(clockout_time:nil)}
   scope :completed, -> {where.not(clockout_time:nil)} # shows all completed shift assigned
+  scope :for_month, -> {}
   #scope  :chronological, -> {order('clockin_time desc')} # shows the shifts by decending clock-in time
   scope :chronological, ->  {joins(:shift).order('start_time desc')}
   def self.create_shift_assignments(shift_ids, employee_ids) 
@@ -26,6 +27,15 @@ class ShiftAssignment < ApplicationRecord
   def completed? # checks if a shift has been completed
     clockout_time.present?
   end
+
+  def grace_time_used # in seconds
+    return 0 unless completed?
+    shift_duration_in_seconds =  (shift.end_time - shift.start_time).to_i
+    duration_in_seconds = (clockout_time - clockin_time).to_i
+    duration_in_seconds < shift_duration_in_seconds ? shift_duration_in_seconds - duration_in_seconds :  0
+  end
+
+  
 
   def duration 
     # calculates the duration of the shift that an employee worked (based on clock-in and clock-out time)
@@ -48,6 +58,10 @@ class ShiftAssignment < ApplicationRecord
     s = shift.start_time.strftime('%H:%M')
     e = shift.end_time.strftime('%H:%M')
     "#{s} - #{e}"
+  end
+
+  def timings_and_location_for_calendar
+    timings_for_calendar + " #{shift.location.name}"
   end
 
   private
