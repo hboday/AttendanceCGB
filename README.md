@@ -76,8 +76,8 @@ If asked for these:
 Continue as follows:
 
 10. In the terminal, run the command “bundle install”
-11. Then, run the command “rails db:reset”
-12. Then, run the command “rails db:migrate”
+11. Then, run the command “rails db:migrate”
+12. Then, run the command “rails db:reset”
 13. Then run, “yarn add sass” 
 14. Then run, “yarn add esbuild” 
 15. Then run, "yarn add stimulus-flatpickr@beta"
