@@ -564,11 +564,11 @@ salah.manager_id = omar.id
 #Shift.delete_all
 
 
-Shift.create_shifts(10.days.ago.strftime("%Y-%m-%d"), 1.day.ago.strftime("%Y-%m-%d"), "10:00", "18:00", 1) 
+Shift.create_shifts(5.days.ago.strftime("%Y-%m-%d"), 1.day.ago.strftime("%Y-%m-%d"), "10:00", "18:00", 1) 
 # creating shifts in a given date range to test the attendance logs
 
 s_ids = Shift.all.map {|s| s.id}
-e_ids = [m, n, ryan, maha].map {|e| e.id}
+e_ids = [m, n, ryan, maha, reem, alya, john, franklin, jack, olivia, amal, omar, mansour].map {|e| e.id}
 
 ShiftAssignment.create_shift_assignments(s_ids, e_ids)
 
@@ -590,7 +590,6 @@ ShiftAssignment.create(shift:ls, employee:n)
 ShiftAssignment.create(shift:ls, employee:ryan)
 ShiftAssignment.create(shift:ls, employee:dana)
 ShiftAssignment.create(shift:ls, employee:emily)
-
 
 # ShiftAssignment.create!([
 #   {employee_id: 1, shift_id: 1, clockin_time: "2023-02-18 18:57:54", clockout_time: "2023-02-18 18:58:00"},
