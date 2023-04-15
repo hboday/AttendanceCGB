@@ -3,86 +3,122 @@
 <head>
 	<title>Employee Login</title>
 	<style type="text/css">
-		body {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			height: 100vh;
-			margin: 0;
-			background-color: #f2f2f2;
-		}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f2f2f2;
+}
 
-		form {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			padding: 40px;
-			border: 1px solid #ccc;
-			background-color: #fff;
-			box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-			border-radius: 5px;
-			width: 100%;
-			max-width: 500px;
-			box-sizing: border-box;
-		}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
 
-		h2 {
-			font-size: 30px;
-			font-weight: bold;
-			margin-bottom: 20px;
-			text-align: center;
-		}
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+  text-transform: uppercase;
+}
 
-		label {
-			font-size: 18px;
-			font-weight: bold;
-			margin-bottom: 10px;
-			text-align: left;
-			width: 100%;
-		}
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #666;
+  
+}
 
-		input {
-			font-size: 20px;
-			padding: 15px;
-			border-radius: 5px;
-			border: 1px solid #ccc;
-			margin-bottom: 20px;
-			width: 100%;
-			box-sizing: border-box;
-		}
+h2 span {
+  color: #4CAF50;
+}
 
-		button {
-			background-color: #4CAF50;
-			color: #fff;
-			border: none;
-			padding: 15px 30px;
-			font-size: 20px;
-			border-radius: 5px;
-			cursor: pointer;
-			margin-top: 20px;
-			width: 100%;
-		}
+label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left;
+  width: 100%;
+}
 
-		button:hover {
-			background-color: #3e8e41;
-		}
+input {
+  font-size: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-		.logo {
-			display: block;
-			margin: 0 auto;
-			width: 200px;
-			height: auto;
-			margin-bottom: 40px;
-		}
+button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+.location-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #999;
+}
+.date-time {
+  font-size: 18px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #999;
+}
 	</style>
 </head>
 <body>
 <%= form_tag("/process", method: "post", id: "form") do %>
   <%= image_tag("logo.svg", width: 200, class: "logo") %>
 	<%= hidden_field_tag :location_id, params[:id] %>
+	<h1><%= @location.name %></h1>
+	<div class="date-time">
+  	<span id="date"></span><br>
+  	<span id="time"></span>
+	</div>
   <h2>Enter Card Number:</h2>
-  <%= text_field_tag :card_num, nil, required: true, class: "form-control form-control-lg mt-3", placeholder: "Card Number" %>
+<%= text_field_tag :card_num, nil, required: true, class: "form-control form-control-lg", placeholder: "Card Number", style: "margin-top: 10px;" %>
+
 
   
 
@@ -111,6 +147,27 @@
 			}, 500);
 		});
 	}, 3000);
+</script>
+
+
+
+<script>
+  // function to update the date and time
+  function updateDateTime() {
+    // get the current date and time
+    var now = new Date();
+    var date = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    var time = now.toLocaleTimeString(undefined, { hour12: false });
+    // update the HTML elements
+    document.getElementById('date').textContent = date;
+    document.getElementById('time').textContent = time;
+  }
+
+  // update the date and time initially
+  updateDateTime();
+
+  // update the date and time every second
+  setInterval(updateDateTime, 1000);
 </script>
 
 </body>

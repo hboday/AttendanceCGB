@@ -568,7 +568,7 @@ Shift.create_shifts(10.days.ago.strftime("%Y-%m-%d"), 1.day.ago.strftime("%Y-%m-
 # creating shifts in a given date range to test the attendance logs
 
 s_ids = Shift.all.map {|s| s.id}
-e_ids = [1, 4]
+e_ids = [m, n, ryan, maha].map {|e| e.id}
 
 ShiftAssignment.create_shift_assignments(s_ids, e_ids)
 
@@ -586,6 +586,10 @@ end
 ls = Shift.create(start_time:4.hours.ago, end_time:4.hours.after, location_id:1) 
 # ongoing shift to clock-in (testing purposes)
 ShiftAssignment.create(shift:ls, employee:m)
+ShiftAssignment.create(shift:ls, employee:n)
+ShiftAssignment.create(shift:ls, employee:ryan)
+ShiftAssignment.create(shift:ls, employee:dana)
+ShiftAssignment.create(shift:ls, employee:emily)
 
 
 # ShiftAssignment.create!([

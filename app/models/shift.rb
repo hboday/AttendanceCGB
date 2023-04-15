@@ -14,7 +14,7 @@ class Shift < ApplicationRecord
       start_datetime = Time.zone.local(date.year, date.month, date.day, start_time.hour, start_time.min, 0)
       end_datetime = Time.zone.local(date.year, date.month, date.day, end_time.hour, end_time.min, 0)
       end_datetime += 1.day if start_time > end_time
-      shift = Shift.create(start_time: start_datetime, end_time: end_datetime, location_id:1).id if which_days.include? date.wday
+      shift = Shift.create(start_time: start_datetime, end_time: end_datetime, location_id:location_id).id if which_days.include? date.wday
       shift unless shift.nil?
     end
   end

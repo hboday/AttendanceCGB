@@ -6,9 +6,6 @@ class ShiftAssignment < ApplicationRecord
   validate :employee_is_not_already_working_on_date, on: create 
   # cannot create another shift for an employee who already has a shift on that day
 
-  #def edit
-    # puts "Hi!!!"
-  #end
 
   scope :upcoming, -> {where(clockout_time:nil)}
   scope :completed, -> {where.not(clockout_time:nil)} # shows all completed shift assigned
@@ -24,29 +21,42 @@ class ShiftAssignment < ApplicationRecord
     end
   end
 
+  def was_edited?
+    edited_clockin_time.present? || edited_clockout_time.present?
+  end
+
   def completed? # checks if a shift has been completed
     clockout_time.present?
   end
 
   def grace_time_used # in seconds
     return 0 unless completed?
-    shift_duration_in_seconds =  (shift.end_time - shift.start_time).to_i
-    duration_in_seconds = (clockout_time - clockin_time).to_i
-    duration_in_seconds < shift_duration_in_seconds ? shift_duration_in_seconds - duration_in_seconds :  0
-  end
 
+    clockin = edited_clockin_time || clockin_time
+    clockout = edited_clockout_time || clockout_time
+
+    shift_duration_in_seconds = (shift.end_time - shift.start_time).to_i
+    duration_in_seconds = (clockout - clockin).to_i
+
+    duration_in_seconds < shift_duration_in_seconds ? shift_duration_in_seconds - duration_in_seconds : 0
+  end
   
 
   def duration 
     # calculates the duration of the shift that an employee worked (based on clock-in and clock-out time)
     return nil unless completed?
 
+    # use edited times if present, otherwise use original times
+    clockin = edited_clockin_time || clockin_time
+    clockout = edited_clockout_time || clockout_time
+
     # displays the duration in hours and remaining minutes
-    duration_in_seconds = (clockout_time - clockin_time).to_i
+    duration_in_seconds = (clockout - clockin).to_i
     duration_in_hours = duration_in_seconds / 3600
     duration_in_minutes = (duration_in_seconds % 3600) / 60
     format('%02d:%02d', duration_in_hours, duration_in_minutes)
   end
+
 
   
 

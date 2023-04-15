@@ -1,4 +1,4 @@
-<div class="card shadow-lg <%= note.present? ? '' : 'calendar-icon-faded' %>" data-date="<%= date.to_s %>">
+<div class="card shadow-lg <%= "" + (date < Date.today ? 'calendar-icon-muted' : '') + (note.present? ? '' : ' calendar-icon-faded') %>" data-date="<%= date.to_s %>">
   <div class="card-header bg-primary text-white text-center py-3">
     <%= date.strftime("%B") %>
   </div>
@@ -14,7 +14,7 @@
     <div class="d-flex justify-content-center" style="height: 50px;">
       <div class="card-text text-center custom-note" style="width: 100%;">
         <div class="fw-bold">
-          <%= note %>
+          <%= note.present? ? note : 'No shift' %>
         </div>
       </div>
     </div>
@@ -41,5 +41,10 @@
 
   .calendar-icon-faded {
     opacity: 0.5;
+  }
+
+  .calendar-icon-muted {
+    background-color: #f2f2f2 !important;
+    color: #999;
   }
 </style>

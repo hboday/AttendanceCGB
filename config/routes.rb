@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
 
   get 'clock/:id', to: 'clock_in#clock_in_out'
+  get 'clock', to: 'clock_in#clock_in_out'
 
   # get 'test/v1' # nicer looking login for employees
   # get 'test/v2' # same as 'clock_in_out'

@@ -1,4 +1,4 @@
-<div class="row edit-shift-assignment" data-bs-toggle="modal" data-bs-target="#edit-shift-assignment-modal" data-shift-assignment-id="<%= shift_assignment.id %>" id="shift-assignment-<%= shift_assignment.id %>">
+<div class="row edit-shift-assignment <%= 'shift-edited' if shift_assignment.was_edited? %>" data-bs-toggle="modal" data-bs-target="#edit-shift-assignment-modal" data-shift-assignment-id="<%= shift_assignment.id %>" id="shift-assignment-<%= shift_assignment.id %>">
 
   <div class="cell" data-title="Name">
     <%= shift_assignment.employee.name %>
@@ -12,16 +12,26 @@
   <div class="cell" data-title="Planned End">
     <%= shift_assignment.shift.end_time.strftime("%H:%M") %>
   </div>
-  <div class="cell" data-title="First Clock-in">
-    <%= shift_assignment.clockin_time.strftime("%H:%M") %>
+  <div class="cell" data-title="Clock-in">
+    <div class="clock-times">
+      <div data-title="Displayed Clock-in"><%= shift_assignment.edited_clockin_time&.strftime("%H:%M") || shift_assignment.clockin_time.strftime("%H:%M") %></div>
+      <% if shift_assignment.edited_clockin_time %>
+        <div class="text-muted small-font"><%= shift_assignment.clockin_time.strftime("%H:%M") %></div>
+      <% end %>
+    </div>
   </div>
-  <div class="cell" data-title="Last Clock-out">
-    <%= shift_assignment.clockout_time.strftime("%H:%M") %>
+  <div class="cell" data-title="Clock-out">
+    <div class="clock-times">
+      <div data-title="Displayed Clock-out"><%= shift_assignment.edited_clockout_time&.strftime("%H:%M") || shift_assignment.clockout_time.strftime("%H:%M") %></div>
+      <% if shift_assignment.edited_clockout_time %>
+        <div class="text-muted small-font"><%= shift_assignment.clockout_time.strftime("%H:%M") %></div>
+      <% end %>
+    </div>
   </div>
   <div class="cell" data-title="Actual Working Hours">
     <%= shift_assignment.duration %>
   </div>
   <div class="cell" data-title="Location">
-      <%= "#{shift_assignment.shift.location.name}" %>
-    </div>
+    <%= shift_assignment.shift.location.name %>
+  </div>
 </div>

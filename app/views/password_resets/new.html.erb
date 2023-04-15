@@ -1,16 +1,36 @@
-<div class="container">
-  <div class="row justify-content-center" style="margin-top: 25vh;">
-    <div class="col-md-6">
-      <div class="my-5">
+<style>
+label {
+  font-size: 1.5em;
+}
+
+h1 {
+  font-size: 2em;
+}
+</style>
+
+<div class="login-form">
+  <div class="container-fluid flex">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-6">
+        <div class="card p-4">
+          <div class="card-body">
+            <div class="text-center mb-4">
+             <%= image_tag("logo.svg", width: 200, class: "logo") %>
+             <br/><br/>
         <h1>Forgot your password?</h1>
+        <br/><br/>
         <%= form_with(url: password_resets_path, local: true) do |f| %>
           <div class="form-group">
             <%= f.label :email %>
+            <br/> <br/> <br/>
             <%= f.email_field :email, class: 'form-control' %>
+            <br/><br/>
           </div>
           <%= f.submit "Send password reset email", class: 'btn btn-primary' %>
         <% end %>
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>

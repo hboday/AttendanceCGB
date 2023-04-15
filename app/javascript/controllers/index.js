@@ -11,3 +11,5 @@ import Flatpickr from "stimulus-flatpickr";
 // import "flatpickr/dist/flatpickr.min.css";
 application.register("flatpickr", Flatpickr);
 
+import SearchController from "./search_controller"
+application.register("search", SearchController)
