@@ -22,8 +22,10 @@
 
 
       <div class="wrapper d-flex align-items-stretch" 
-      data-controller="sidebar" 
-      data-sidebar-open-class="open">
+     data-controller="sidebar" 
+     data-sidebar-open-class="open"
+     data-sidebar-user-id="<%= current_user.id %>">
+
         
         <%= render 'shared/sidebar' %>
         <%= render 'shared/slidebar' %>
