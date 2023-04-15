@@ -80,7 +80,8 @@ Continue as follows:
 12. Then, run the command “rails db:seed” 
 13. Then run, “yarn add sass” 
 14. Then run, “yarn add esbuild” 
-15. Then run, “bin/dev” to run the server
+15. Then run, "yarn add stimulus-flatpickr@beta"
+16. Then run, “bin/dev” to run the server
 
 
 To manually open a locally stored file:
